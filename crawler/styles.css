@@ -1,0 +1,22 @@
+/* styles.css */
+table {
+    width: 100%;
+    border-collapse: collapse; /* 테이블의 셀 간격을 없앰 */
+}
+th, td {
+    border: 1px solid black; /* 모든 셀에 테두리를 추가 */
+    padding: 8px; /* 셀 내 여백을 추가 */
+    text-align: left; /* 텍스트를 왼쪽 정렬 */
+}
+/* code의 경우 문서 특성 이슈가 있음 */
+/*pre, code {*/
+/*    display: block; !* 코드 블록을 별도의 블록 요소로 지정 *!*/
+/*    font-family: Consolas, "Courier New", monospace; !* 고정폭 글꼴 *!*/
+/*    background-color: #f8f8f8; !* 코드 블록 배경색 *!*/
+/*    border: 1px solid #ccc; !* 코드 블록 테두리 *!*/
+/*    padding: 10px; !* 코드 블록 내 여백 *!*/
+/*    overflow-x: auto; !* 긴 코드의 경우 가로 스크롤 가능하도록 *!*/
+/*    white-space: pre-wrap; !* 줄바꿈을 유지하며 길이가 길 경우 자동 줄바꿈 *!*/
+/*    border-radius: 5px; !* 모서리를 둥글게 *!*/
+/*    margin: 10px 0; !* 코드 블록 상하단 여백 *!*/
+/*}*/

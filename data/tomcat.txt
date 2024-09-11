@@ -1,0 +1,24 @@
+tomcat
+
+
+#Tomcat SSL인증서 적용
+
+
+
+##1. 인증서 저장
+
+Tomcat(WAS) 단독으로 운영 시 적용 가능인증서( Ex. .keystore )를 해당서버의 임의의 폴더에 저장  
+tomcat이 있는 상위 폴더에 SSL 폴더 생성하여 인증서 저장 or 임의의 폴더 지정(생성)하여 인증서 저장 가능( 경로 : ./SSL/.keystore )https://wiki.direa.synology.me/https://user-images.githubusercontent.com/102738721/233297090-8a80c40e-cb16-41df-aab0-fa97a622aef6.png
+
+##2. 환경설정( Tomcat 버전 폴더/conf/server.xml ) 파일 수정
+
+SSL connector port는 443이 기본 ( 중복 불가 )  
+443 사용 안 할 시 임의 port 지정하여 설정  
+https 관련 설정이 주석처리 되어 있으면 주석을 지워주고 수정server.xml에 소스 추가 및 포트 수정 후  
+tomcat 재기동  
+( keystoreFile : ‘인증서가 있는 파일경로/인증서 파일명’ , keystorePass : ‘인증서 암호 키’ )https://wiki.direa.synology.me/https://user-images.githubusercontent.com/102738721/233297732-f95ea632-4b06-4ba5-9e06-b166c6c478bb.png
+
+##3. server.xml 파일 수정해도 https로 접속이 안 되는 경우 web.xml 수정
+
+Tomcat 버전 폴더/conf/web.xml에 아래 영역의 소스 추가  
+( http로 접속할 때 강제로 https로 접속해주는 xml )https://wiki.direa.synology.me/https://user-images.githubusercontent.com/102738721/233297976-3016eebc-1ef9-4f81-8265-dd7973510ccd.png수정 후 tomcat 재기동!
