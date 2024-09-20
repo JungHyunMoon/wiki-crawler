@@ -105,7 +105,7 @@ pinecone-plugin-inference==1.0.3
 pinecone-plugin-interface==0.0.7
 portalocker==2.10.1
 proto-plus==1.24.0
-protobuf==5.28.0
+protobuf==4.25.5
 protoc-gen-openapiv2==0.0.1
 psutil==6.0.0
 pyasn1==0.6.0

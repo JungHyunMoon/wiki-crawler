@@ -14,7 +14,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from VecDBLoader import embedding_file
+from VecDBLoader import embedding_file, embedding_text_line
 
 from s3Service import s3_upload
 
@@ -236,7 +236,8 @@ def dfs_crawl(driver, visited, crawledPages):
                 driver.get(link)
                 contents_html = crawl_html_by_class(driver, "v-main__wrap")
                 cleaned_html = add_head_and_cleanup_html(crawl_html_by_class(driver, "contents"), driver)
-                data_text = convert_html_to_md(contents_html)
+                main_title, text_data = convert_html_to_md(contents_html)
+                embedding_text_line(main_title, text_data)
 
                 try:
                     options = {
@@ -247,16 +248,16 @@ def dfs_crawl(driver, visited, crawledPages):
                         # 'Cookie': get_cookies_dict(driver)
                     }
 
-                    # pdfkit.from_string(cleaned_html, data_text[0] + ".pdf", options=options, css="styles.css")
+                    # pdfkit.from_string(cleaned_html, main_title + ".pdf", options=options, css="styles.css")
                     pdf = pdfkit.from_string(cleaned_html, False, options=options, css="styles.css")
 
-                    s3_upload(data_text[0], pdf)
+                    s3_upload(main_title, pdf)
                     print(f"{link} 페이지를 PDF로 변환 완료.")
                 except Exception as e:
                     print(f"PDF 변환 중 오류 발생: {e}")
 
                 try:
-                    save_doc(data_text[0], data_text[1])
+                    save_doc(main_title, text_data)
                 except IndexError:
                     print("someThing wrong with this page")
                     break
@@ -300,7 +301,6 @@ def save_doc(doc_title, data):
 
     print(f"Data saved to {file_path}")
 
-    embedding_file(file_path)
     time.sleep(3)
 
 

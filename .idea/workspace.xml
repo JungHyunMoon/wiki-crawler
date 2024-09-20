@@ -4,280 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3323663-44a6-4951-ab32-890e38917d63" name="Changes" comment="">
+    <list default="true" id="b3323663-44a6-4951-ab32-890e38917d63" name="Changes" comment=" init : crawler&#10; &#10; wiki 크롤러&#10; PDF 저장 버전&#10; 테스트용 임시 코드 미삭제">
       <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/WebCrawler.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VecDBLoader.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/crawler/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/crawler/wiki.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/0. message_queue.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/1. activeMQ.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/131_서버.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/137_서버.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/138_서버.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/141_서버.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/165_서버.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/2. RabbitMQ.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/2023. 05. 02. 오픈뱅킹 운영장애.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/202_서버.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/205_서버.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/206_서버.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/225_서버.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/226_서버.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/231110.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/231130.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/3. kafka.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/4. zeroMQ.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/AIX Heapdump 분석툴 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/API Document.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/AWS_QuickSight.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/ActiveMQ 버전업.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Architecture.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/BNK캐피탈.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/BatchHeaderFilter.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/CacheUtil 클래스 메서드 목록.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/CircuitBreaker.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/JMX call (즉시 실행 클라이언트) 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Junit 5 (Jupiter).txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/KAIT.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/KB글로벌.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/KRaft 모드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Kafka REST API.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Kafka vs Redis.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Kibana 설정 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Linux.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/LoggerError01.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Logstash.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/MetricBeat 설정 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Mule 거래처리 성능 테스트.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/NH(All-One-Bank).txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/NH저축은행.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Nginx compile&amp;install.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Nginx를 사용한 이미지 서버 구축.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/OKD 4.13 설치 방법.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/OKD 계정 생성.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Opensearch.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Oracle 버전에 따른 JVM, OJDBC 사용 범위.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Prometheus - Loki - Grafana를 이용한 모니터링.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/PropertiesLauncher 설정.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Proxy.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/REDIS NODE2 구성.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Redis.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/RestoreKeySetFilter.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/RootExceptionFilter.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/SBI저축은행.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/SK일렉링크(구 에스트래픽).txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/SMS 연동 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/SSL 인증서 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/SSL 인증서 갱신 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Server 계정신청.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/SingleBatch&amp;InnerBatchScheduler분리.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/SonarQube.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/T2T 업무 가이드 (S2A).txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/T2T 업무 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/T2T 업무 가이드10.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/T2T 업무 등록 가이드(HTTP).txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/TCP S2S 거래테스트.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/TCP 길이정보 테스트케이스.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/TCP 숫자타입.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/TCP 업무 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/URL Encoding.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/User 권한 설정 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Wiki 사진 올리는 법.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[230509][우리카드] JsonToFixed 시 그리드 크기 조절.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[230510] INI 파일 읽는 법.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[230512] 전문 변환 데이터 타입.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[230512] 전문 종류 및 특징.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[230512][롯데캐피탈] 전문 변환 시 공백 유지.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[230515] 전문 변환 모듈 동작 방법.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[230516] CruzTgrm 환경변수.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[230516][우리카드] 고정 그리드의 크기를 입력 데이터 크기에 따라 설정하기.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[230517] 고정 그리드 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[230612][롯데캐피탈] 간헐적 JsonToJson NoSuchFieldException.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[230627] Eims-transform 진행사항.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[230627] 전문 변환 모듈 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[230627] 전문 변환 모듈 개선점.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[230627] 전문 변환 모듈 패치법.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[230629] 차세대 구상도.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[240117] 유저 함수 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[CruzLink4.5] Redis 사용 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[CruzLink4.5] 기동 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[CruzLink4.5] 버전 릴리즈 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[CruzLink4.5] 버전관리규칙.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[CruzLink4.5] 서버 그룹기동가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[CruzLink4.5] 설치가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[CruzLink4.5] 설치파일 생성가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[CruzLink4.5] 인스턴스 로드밸런싱 세팅 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[Cruzlink 4.5] ActiveMQ 버전업 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[Cruzlink4.5] 이관 설치가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[Cruzlink4.5] 전문변환 테스트.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[iStudio] iStudio설치가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[공통] 채널 가이드 - 담당자정보.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[공통] 채널 가이드 - 어댑터옵션.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[공통] 채널 가이드 - 전문정보.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[공통] 채널 가이드 - 채널정보.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[배치]  SFTP 어댑터 등록 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[배치] DB 어댑터 등록 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[배치] EDI 어댑터 등록 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[배치] FTP 어댑터 등록 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[서버] .bash_profile 설정 값.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[서버] kernel performance.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[서버] linux kernel 설정 값 변경 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[업무] Async 업무 등록 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[업무] EDI 대표 형식.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[업무] EDI 대표 형식별 분류 방법.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[업무] EDI 사양서 리스트.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[업무] 온라인 거래 배치 연계 기능.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[업무] 폴링 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[업무] 후행인터페이스 호출.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[온라인] HTTP 어댑터 등록 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[온라인] HTTPS 어댑터 등록 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[온라인] TCP 어댑터 등록 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[온라인] TCP 채널 설정 가이드 - 길이정보.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[온라인] TCP 채널 설정 가이드 - 세션.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[온라인] 업무 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[우리카드] API 개발 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[채널] Mule Threads 동적 변경 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/[한국투자저축은행] 전문이관 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/batchError01.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/batch_call 흐름도.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/commit_rule.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/installError01.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/jConsole.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/jmeter.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/kafka 성능 설정.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/kafka.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/kafka_cli.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/local.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/mule-tuning-performance(3.5).txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/mule모니터링 테스트.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/nginx.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/ngrinder.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/opensearch 설치 및 설정.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/springBatch.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/svn에서 gitlab으로 소스 이관.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/tcp.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/tomcat.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/visualVM.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/가용성테스트.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/개발서버 계정 생성 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/개발서버 계정_설치 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/거래로그 암복호화 API 개발 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/거래연계절차 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/거래테스트.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/검증서버.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/경남은행.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/공유정보.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/교원.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/교통은행.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/군인공제회.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/그룹 및 채널 기동 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/그룹등록 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/기능 검증.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/기능목록.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/기동오류.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/노드 간 통신 프로젝트.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/노드간통신 설정 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/농협.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/농협대외시뮬레이터.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/대구은행 배치 송신업무.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/데이터 정합성 및 무결성 검증 방식.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/데이터등록정보확인.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/도이치파이낸셜.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/로그암호화필드복호화방법.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/롯데렌탈.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/롯데멤버스.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/롯데카드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/롯데캐피탈.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/메리츠캐피탈.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/메리츠화재.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/모니터링 세팅 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/배치거래연계절차.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/배치장애 해결 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/베트남우리은행펌뱅킹 패치내역.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/베트남우리은행펌뱅킹.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/볼보파이낸셜.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/부산은행.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/사이트 정보 템플릿.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/삼성자산운용 커스텀 내역.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/삼성자산운용.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/서버 설정 정리.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/서버정보.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/서울시립대학교.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/세션 클러스터링이란.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/솔루션 권장 사양.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/솔루션 정보.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/수협.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/스카니아.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/시뮬레이터 사용 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/시뮬레이터 설정.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/시뮬레이터 초기 세팅 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/신한은행-콜센터.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/신한캐피탈.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/신협.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/싱글 배치 어댑터 ConnectionPoolManager 적용 테스트.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/싱글배치 설정 매뉴얼.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/암호화 방식.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/업무 가이드 - 업무옵션.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/업무 등록 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/에스트래픽 이슈사항 정리.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/엑셀다운로드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/요구사항001 - 비동기방식의 Outbound거래에 대한 연결거래 처리.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/요구사항002-Imanager 웹화면 내 채널_인터페이스_플로우 신규등록.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/요구사항003-이중화되어 있지 않은 개발서버 테스트(DROP).txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/요구사항004-1분당 3000건 이상 거래처리 확인.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/우리카드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/운영 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/위텍스.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/유량제어 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/유지보수기관.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/이중화 구성 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/자바 옵션 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/저축은행중앙회.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/전문반영가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/전문변환 유저함수개발가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/접근통제 방식.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/정기점검 쉘 요구명세.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/중국은행.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/채널 상세 정보 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/카오스몽키.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/카카오페이손해보험.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/카카오페이증권(구.바로투자증권).txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/카페24.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/카프카 모니터링.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/카프카 성능 테스트 도구.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/커스텀 클래스 내용 정리.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/커스텀 클래스 사용 목록.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/커스텀 필터 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/케이뱅크.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/코나아이 노드간 통신 테스트 케이스 정리.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/코나아이 노드간 통신개발 운영자메뉴얼.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/코나아이.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/코드정의.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/코리안리.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/통계 모듈 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/페퍼저축은행.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/플로우 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/플로우 등록 가이드.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/플로우 사용 목록.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/플로우 필터 사용 목록.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/핀크(FINNQ).txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/하나손해보험.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/한국교직원공제회.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/한국신용정보원.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/한국주택금융공사.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/한국증권금융.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/한국투자저축은행 패치노트.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/한국투자저축은행.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/한국투자캐피탈.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/해시값구하는 법.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/회고록.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/s3Service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/WebCrawler.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/WebCrawler.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VecDBLoader.py" beforeDir="false" afterPath="$PROJECT_DIR$/VecDBLoader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crawler/wiki.py" beforeDir="false" afterPath="$PROJECT_DIR$/crawler/wiki.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -285,11 +19,33 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;JungHyunMoon&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/JungHyunMoon/wiki-crawler.git&quot;,
+    &quot;accountId&quot;: &quot;c024b99d-4a2a-458f-8637-cdd9cc84a3b5&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/.venv/.gitignore" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/.venv/Lib/site-packages/langchain_community/document_loaders/text.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/.venv/Lib/site-packages/langchain_core/document_loaders/base.py" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2lrwI2IRJtOSwitDycbhdmvNBcw" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -309,6 +65,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -335,14 +92,65 @@
       <updated>1725951190796</updated>
       <workItem from="1725951202123" duration="212000" />
       <workItem from="1725951422632" duration="6998000" />
+      <workItem from="1726015977129" duration="4856000" />
+      <workItem from="1726045299555" duration="273000" />
+      <workItem from="1726118965692" duration="6324000" />
+      <workItem from="1726197810121" duration="5438000" />
+      <workItem from="1726708328929" duration="492000" />
+      <workItem from="1726720376009" duration="1484000" />
+      <workItem from="1726724241457" duration="12884000" />
     </task>
+    <task id="LOCAL-00001" summary=" init : crawler&#10; &#10; wiki 크롤러&#10; PDF 저장 버전&#10; 테스트용 임시 코드 미삭제">
+      <option name="closed" value="true" />
+      <created>1726016215729</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1726016215729</updated>
+    </task>
+    <task id="LOCAL-00002" summary=" init : crawler&#10; &#10; wiki 크롤러&#10; PDF 저장 버전&#10; 테스트용 임시 코드 미삭제">
+      <option name="closed" value="true" />
+      <created>1726016254234</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1726016254234</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value=" init : crawler&#10; &#10; wiki 크롤러&#10; PDF 저장 버전&#10; 테스트용 임시 코드 미삭제" />
+    <option name="LAST_COMMIT_MESSAGE" value=" init : crawler&#10; &#10; wiki 크롤러&#10; PDF 저장 버전&#10; 테스트용 임시 코드 미삭제" />
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/WebCrawler$wiki.coverage" NAME="wiki Coverage Results" MODIFIED="1725954385702" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/crawler" />
-    <SUITE FILE_PATH="coverage/WebCrawler$VecDBLoader.coverage" NAME="VecDBLoader Coverage Results" MODIFIED="1725953809797" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/WebCrawler$wiki.coverage" NAME="wiki Coverage Results" MODIFIED="1726736478445" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/crawler" />
+    <SUITE FILE_PATH="coverage/WebCrawler$VecDBLoader.coverage" NAME="VecDBLoader Coverage Results" MODIFIED="1726736459623" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
