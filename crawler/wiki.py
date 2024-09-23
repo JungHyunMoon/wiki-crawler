@@ -9,14 +9,11 @@ from dotenv import load_dotenv
 from urllib.parse import urljoin
 
 from bs4 import BeautifulSoup
-from langchain_community.document_loaders import DirectoryLoader
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from VecDBLoader import embedding_file, embedding_text_line
-
-from s3Service import s3_upload
 
 def login(driver, url, user_id, user_pw):
     # 웹페이지 요청
@@ -141,54 +138,6 @@ def create_session_from_driver(driver):
         session.cookies.set(cookie['name'], cookie['value'])
     return session
 
-def add_head_and_cleanup_html(html_content, driver):
-    soup = BeautifulSoup(html_content, 'html.parser')
-
-    if not soup.html:
-        html_tag = soup.new_tag('html')
-        soup.insert(0, html_tag)
-
-    if not soup.head:
-        head_tag = soup.new_tag('head')
-        if soup.html:
-            soup.html.insert(0, head_tag)
-        else:
-            soup.insert(0, head_tag)
-
-    if not soup.head.find('meta', charset=True):
-        meta_tag = soup.new_tag('meta', charset='UTF-8')
-        soup.head.append(meta_tag)
-
-    style_tag = soup.new_tag('style')
-    style_tag.string = """
-    body { font-family: 'Arial', sans-serif; }
-    """
-    soup.head.append(style_tag)
-
-    for button in soup.find_all('button', string='Copy'):
-        button.decompose()
-
-    # 이미지 다운로드 후 base64로 변환하여 포함
-    for img in soup.find_all('img'):
-        src = img.get('src')
-        base_url = "https://wiki.direa.synology.me/ko"
-        if src:
-            # 절대 경로 생성
-            abs_url = urljoin(base_url, src)
-            try:
-                response = create_session_from_driver(driver).get(abs_url)
-                if response.status_code == 200:
-                    # 이미지 데이터를 base64로 인코딩
-                    image_data = base64.b64encode(response.content).decode('utf-8')
-                    image_format = src.split('.')[-1]  # 이미지 형식 추출 (예: png, jpg)
-                    img['src'] = f"data:image/{image_format};base64,{image_data}"  # base64 데이터로 src 설정
-                else:
-                    print(f"이미지 다운로드 실패: {abs_url}")
-            except Exception as e:
-                print(f"이미지 다운로드 중 오류 발생: {e}")
-
-    return str(soup)
-
 
 def get_cookies_dict(driver):
     cookies = driver.get_cookies()
@@ -235,32 +184,9 @@ def dfs_crawl(driver, visited, crawledPages):
                 print(link + " 페이지 크롤링 진행중")
                 driver.get(link)
                 contents_html = crawl_html_by_class(driver, "v-main__wrap")
-                cleaned_html = add_head_and_cleanup_html(crawl_html_by_class(driver, "contents"), driver)
                 main_title, text_data = convert_html_to_md(contents_html)
                 embedding_text_line(main_title, text_data)
 
-                try:
-                    options = {
-                        'encoding': "UTF-8",
-                        'no-stop-slow-scripts': '',
-                        'javascript-delay': '3000', # JavaScript 로딩을 기다리기 위해 추가
-                        'debug-javascript': '',  # JavaScript 디버그 정보를 출력하도록 설정
-                        # 'Cookie': get_cookies_dict(driver)
-                    }
-
-                    # pdfkit.from_string(cleaned_html, main_title + ".pdf", options=options, css="styles.css")
-                    pdf = pdfkit.from_string(cleaned_html, False, options=options, css="styles.css")
-
-                    s3_upload(main_title, pdf)
-                    print(f"{link} 페이지를 PDF로 변환 완료.")
-                except Exception as e:
-                    print(f"PDF 변환 중 오류 발생: {e}")
-
-                try:
-                    save_doc(main_title, text_data)
-                except IndexError:
-                    print("someThing wrong with this page")
-                    break
         ############ 파일 탐색 ############
 
         ############ 경로 탐색 ############
@@ -277,7 +203,6 @@ def dfs_crawl(driver, visited, crawledPages):
             dfs_crawl(driver, visited, crawledPages)
         else:
             path_pointer(driver, prev_div.get_text().strip())
-            time.sleep(1)
             break
         ############ 경로 탐색 ############
 
@@ -301,7 +226,7 @@ def save_doc(doc_title, data):
 
     print(f"Data saved to {file_path}")
 
-    time.sleep(3)
+    time.sleep(0.2)
 
 
 def open_file(file_path):
