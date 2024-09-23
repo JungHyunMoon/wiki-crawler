@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3323663-44a6-4951-ab32-890e38917d63" name="Changes" comment=" init : crawler&#10; &#10; wiki 크롤러&#10; PDF 저장 버전&#10; 테스트용 임시 코드 미삭제">
+    <list default="true" id="b3323663-44a6-4951-ab32-890e38917d63" name="Changes" comment=" refactor : crawler merge with embeddings&#10; &#10; 하나의 코드 스페이스로 리팩토링">
       <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/WebCrawler.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/WebCrawler.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VecDBLoader.py" beforeDir="false" afterPath="$PROJECT_DIR$/VecDBLoader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crawler/wiki.py" beforeDir="false" afterPath="$PROJECT_DIR$/crawler/wiki.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,23 +47,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.VecDBLoader.executor": "Run",
-    "Python.wiki.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/foqlz/PycharmProjects/WebCrawler/data",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.VecDBLoader.executor&quot;: &quot;Run&quot;,
+    &quot;Python.wiki.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/foqlz/PycharmProjects/WebCrawler/data&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\foqlz\PycharmProjects\WebCrawler\data" />
@@ -99,6 +94,8 @@
       <workItem from="1726708328929" duration="492000" />
       <workItem from="1726720376009" duration="1484000" />
       <workItem from="1726724241457" duration="12884000" />
+      <workItem from="1726809619984" duration="7930000" />
+      <workItem from="1727050866055" duration="3775000" />
     </task>
     <task id="LOCAL-00001" summary=" init : crawler&#10; &#10; wiki 크롤러&#10; PDF 저장 버전&#10; 테스트용 임시 코드 미삭제">
       <option name="closed" value="true" />
@@ -116,7 +113,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726016254234</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary=" refactor : crawler merge with embeddings&#10; &#10; 하나의 코드 스페이스로 리팩토링">
+      <option name="closed" value="true" />
+      <created>1726812627349</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1726812627349</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,7 +152,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value=" init : crawler&#10; &#10; wiki 크롤러&#10; PDF 저장 버전&#10; 테스트용 임시 코드 미삭제" />
-    <option name="LAST_COMMIT_MESSAGE" value=" init : crawler&#10; &#10; wiki 크롤러&#10; PDF 저장 버전&#10; 테스트용 임시 코드 미삭제" />
+    <MESSAGE value=" refactor : crawler merge with embeddings&#10; &#10; 하나의 코드 스페이스로 리팩토링" />
+    <option name="LAST_COMMIT_MESSAGE" value=" refactor : crawler merge with embeddings&#10; &#10; 하나의 코드 스페이스로 리팩토링" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/WebCrawler$wiki.coverage" NAME="wiki Coverage Results" MODIFIED="1726736478445" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/crawler" />
