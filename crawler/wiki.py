@@ -4,11 +4,13 @@ import time
 
 import pdfkit
 import requests
+import schedule
 
 from dotenv import load_dotenv
 from urllib.parse import urljoin
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
+from nltk.corpus.reader import documents
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
@@ -74,6 +76,17 @@ def remove_special_characters(input_string):
 def convert_html_to_md(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
 
+    # 수정 기록 추출
+    # aria-label이 "수정기록"인 태그 찾기
+    tag = soup.find("span", text="마지막 수정:")
+    print(tag)
+
+    # 부모 노드의 3번째 형제 노드 Text(수정 기록) 가져오기
+    parent_node = tag.parent
+    siblings = [s for s in parent_node.next_siblings if isinstance(s, Tag)]
+    last_modified = siblings[1].get_text(strip=True)
+    print(last_modified)
+
     # 메인 제목과 설명 추출
     main_title_element = soup.find('div', class_='headline grey--text text--darken-3')
     main_description_element = soup.find('div', class_='caption grey--text text--darken-1')
@@ -129,7 +142,7 @@ def convert_html_to_md(html_content):
                 text = text.replace("\n", "  \n")  # markdown 줄바꿈 인식을 위한 처리
                 text_data.append(text)
 
-    return main_title, text_data
+    return main_title, text_data, last_modified
 
 def create_session_from_driver(driver):
     session = requests.Session()
@@ -184,8 +197,8 @@ def dfs_crawl(driver, visited, crawledPages):
                 print(link + " 페이지 크롤링 진행중")
                 driver.get(link)
                 contents_html = crawl_html_by_class(driver, "v-main__wrap")
-                main_title, text_data = convert_html_to_md(contents_html)
-                embedding_text_line(main_title, text_data)
+                main_title, text_data, last_modified = convert_html_to_md(contents_html)
+                embedding_text_line(main_title, text_data, last_modified)
 
         ############ 파일 탐색 ############
 
@@ -233,7 +246,11 @@ def open_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
         return f.read()
 
-if __name__ == "__main__":
+
+def do_crawl():
+    print("=====================================================================")
+    print("===================== DIREA WIKI CRAWLING START =====================")
+    print("=====================================================================")
     url = 'https://wiki.direa.synology.me/login'
     load_dotenv()
     user_id = os.getenv("USER_ID")
@@ -254,9 +271,9 @@ if __name__ == "__main__":
     login(driver, url, user_id, user_pw)
     print("Logged in successfully.")
 
-
-    for menu_index in [1,2,3,4]:
-        topMenu = driver.find_element(By.XPATH, f"(//div[@class='v-list-item v-list-item--link theme--dark'][{menu_index}])")
+    for menu_index in [1, 2, 3, 4]:
+        topMenu = driver.find_element(By.XPATH,
+                                      f"(//div[@class='v-list-item v-list-item--link theme--dark'][{menu_index}])")
         topMenu.click()
         time.sleep(5)
 
@@ -268,26 +285,15 @@ if __name__ == "__main__":
     driver.quit()
 
 
+if __name__ == "__main__":
 
+    # 매일 자정에 한번씩 수행
+    schedule.every().day.at("17:00").do(do_crawl)
+    do_crawl()
 
-    # # 테스트시 아래 단일 디렉토리 이용
-    #
-    # # 최상위 디렉토리로 이동
-    # # 1 : common
-    # # 2 : CruzAPIM
-    # # 3 : cruzLink
-    # # 4 : UI/UX
-    # topElement = driver.find_element(By.XPATH, "(//div[@class='v-list-item v-list-item--link theme--dark'])[4]")
-    # topElement.click()
-    # time.sleep(3)
-    #
-    # # test_url = "https://wiki.direa.synology.me/ko/cruzlink/guide/interface/f2f-interface-guide"
-    # # driver.get(test_url)
-    # # time.sleep(3)
-    #
-    # visited = set()
-    # crawledPages = []
-    # dfs_crawl(driver, visited, crawledPages)
-    #
-    # #WebDriver 종료
-    # driver.quit()
+    print("Schedule started.")
+
+    while True:
+        # 예약된 작업이 있는지 확인하고 실행
+        schedule.run_pending()
+        time.sleep(60)  # 60초마다 체크 (1분 간격)
