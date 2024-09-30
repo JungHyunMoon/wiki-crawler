@@ -15,7 +15,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from VecDBLoader import embedding_file, embedding_text_line
+from VecDBLoader import embedding_text_line
 
 def login(driver, url, user_id, user_pw):
     # 웹페이지 요청
@@ -79,13 +79,12 @@ def convert_html_to_md(html_content):
     # 수정 기록 추출
     # aria-label이 "수정기록"인 태그 찾기
     tag = soup.find("span", text="마지막 수정:")
-    print(tag)
 
     # 부모 노드의 3번째 형제 노드 Text(수정 기록) 가져오기
     parent_node = tag.parent
     siblings = [s for s in parent_node.next_siblings if isinstance(s, Tag)]
     last_modified = siblings[1].get_text(strip=True)
-    print(last_modified)
+    print(f"wiki : {last_modified}")
 
     # 메인 제목과 설명 추출
     main_title_element = soup.find('div', class_='headline grey--text text--darken-3')
