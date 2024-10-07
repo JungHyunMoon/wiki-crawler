@@ -1,21 +1,26 @@
-import base64
+import os
 import os
 import time
-
-import pdfkit
-import requests
-import schedule
-
-from dotenv import load_dotenv
 from urllib.parse import urljoin
 
+import requests
+import schedule
 from bs4 import BeautifulSoup, Tag
-from nltk.corpus.reader import documents
+from dotenv import load_dotenv
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
+
 from VecDBLoader import embedding_text_line
+
+from langchain_core.documents import Document
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_pinecone import PineconeVectorStore
+from langchain_upstage import UpstageEmbeddings
+from langchain.vectorstores import Chroma
+from dotenv import load_dotenv
+
 
 def login(driver, url, user_id, user_pw):
     # 웹페이지 요청
@@ -287,7 +292,7 @@ def do_crawl():
 if __name__ == "__main__":
 
     # 매일 자정에 한번씩 수행
-    schedule.every().day.at("17:00").do(do_crawl)
+    schedule.every().day.at("00:00").do(do_crawl)
     do_crawl()
 
     print("Schedule started.")
