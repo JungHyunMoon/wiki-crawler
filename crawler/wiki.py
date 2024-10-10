@@ -27,7 +27,7 @@ def login(driver, url, user_id, user_pw):
     driver.get(url)
 
     # 페이지 로드 대기
-    time.sleep(3)  # JavaScript가 실행될 시간을 기다림
+    time.sleep(5)  # JavaScript가 실행될 시간을 기다림
 
     # ID, PW 입력
     driver.find_element(By.ID, 'input-20').send_keys(user_id)

@@ -9,6 +9,7 @@ from langchain_pinecone import PineconeVectorStore
 from langchain_upstage import UpstageEmbeddings
 from langchain.vectorstores import Chroma
 from dotenv import load_dotenv
+from Logger import create_wiki_log
 
 load_dotenv()
 
@@ -22,6 +23,7 @@ def get_vectorstore(embeddings, collection_name):
 
 def embedding_text_line(source, text_list, document_version):
     # 텍스트 결합
+    global log_msg
     combined_text = " ".join(text_list)
     document = Document(
         page_content=combined_text,
@@ -43,19 +45,21 @@ def embedding_text_line(source, text_list, document_version):
         include=['metadatas']
     )
 
+    log_msg = ""
     if existing_docs['metadatas']:
         existing_version = existing_docs['metadatas'][0].get('version')
-        print(f"vector : {existing_version}")
         if existing_version == document_version:
-            print(f"문서 '{source}'는 이미 최신 버전입니다. 업데이트를 건너뜁니다.")
+            log_msg = f"EXIST >>> 문서 '{source}'는 이미 최신 버전입니다. 업데이트를 건너뜁니다."
+            create_wiki_log("existFile", log_msg)
             return
         else:
-            print(f"문서 '{source}'의 버전이 변경되었습니다. 업데이트를 진행합니다.")
+            log_msg = f"UPDATE >>> 문서 '{source}'의 버전이 변경되었습니다. 기존 문서를 삭제하고 업데이트를 진행합니다."
             # 기존 문서 삭제
             vectorstore.delete(where={"source": source})
     else:
-        print(f"문서 '{source}'는 새로운 문서입니다. 추가를 진행합니다.")
+        log_msg = f"CREATE >>> 문서 '{source}'는 새로운 문서입니다. 추가를 진행합니다."
 
+    create_wiki_log("newFile", log_msg)
     # 새로운 문서 추가
     vectorstore.add_documents(document_list)
     vectorstore.persist()
