@@ -1,68 +1,85 @@
 import os
 import time
 
-from langchain_community.document_loaders import DirectoryLoader, TextLoader
-from langchain_community.utils.math import cosine_similarity
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_pinecone import PineconeVectorStore
+from pinecone.grpc import PineconeGRPC as Pinecone
 from langchain_upstage import UpstageEmbeddings
-from langchain.vectorstores import Chroma
 from dotenv import load_dotenv
 from Logger import create_wiki_log
 
 load_dotenv()
 
 
-def get_vectorstore(embeddings, collection_name):
-    return Chroma(
-        collection_name=collection_name,
-        embedding_function=embeddings,
-        persist_directory='../chroma_db'  # 데이터베이스를 저장할 디렉토리 지정
-    )
-
 def embedding_text_line(source, text_list, document_version):
     # 텍스트 결합
-    global log_msg
     combined_text = " ".join(text_list)
     document = Document(
         page_content=combined_text,
         metadata={"source": source, "version": document_version}
     )
-
-    collection_name = "wiki-upstage-collection"
     chunk_size = 1500
-
-    embeddings = get_embeddings()
-    vectorstore = get_vectorstore(embeddings, collection_name)
-
     # 문서 분할
     document_list = load_and_split_from_text([document], chunk_size)
 
-    # 메타데이터 기반으로 기존 문서 검색
-    existing_docs = vectorstore.get(
-        where={"source": source},
-        include=['metadatas']
+    index_name = "wiki-upstage-index"
+    collection_name = "chunk_1500_v2"
+
+    # DB 초기화
+    pc = Pinecone()
+    index = pc.Index(index_name)
+
+    filter_condition = {
+        "source": source,
+        "version": document_version
+    }
+
+    # 인덱스의 차원에 맞춘 제로 벡터 사용
+
+    vector_dimension = 4096
+    dummy_vector = [0.0] * vector_dimension
+
+    # 기존 문서 조회 쿼리
+    existing_docs = index.query(
+        namespace=collection_name,
+        vector=dummy_vector,
+        filter=filter_condition,
+        include_metadata=True,  # 메타데이터 포함
+        top_k=50
     )
 
     log_msg = ""
-    if existing_docs['metadatas']:
-        existing_version = existing_docs['metadatas'][0].get('version')
+
+    # metadata version을 기준으로 문서 갱신 판단
+    if existing_docs.get("matches"):
+        existing_version = existing_docs.get("matches")[0].get("metadata").get("version")
         if existing_version == document_version:
             log_msg = f"EXIST >>> 문서 '{source}'는 이미 최신 버전입니다. 업데이트를 건너뜁니다."
             create_wiki_log("existFile", log_msg)
             return
         else:
             log_msg = f"UPDATE >>> 문서 '{source}'의 버전이 변경되었습니다. 기존 문서를 삭제하고 업데이트를 진행합니다."
+            # ID 리스트 추출
+            ids_to_delete = [match['id'] for match in existing_docs["matches"]]
             # 기존 문서 삭제
-            vectorstore.delete(where={"source": source})
+            # ID 리스트가 비어있지 않은 경우에만 삭제
+            if ids_to_delete:
+                index.delete(ids=ids_to_delete, namespace=collection_name)
+            return
     else:
         log_msg = f"CREATE >>> 문서 '{source}'는 새로운 문서입니다. 추가를 진행합니다."
 
+    # 로그 남기기
     create_wiki_log("newFile", log_msg)
+
     # 새로운 문서 추가
-    vectorstore.add_documents(document_list)
-    vectorstore.persist()
+    PineconeVectorStore.from_documents(
+        index_name=index_name,
+        namespace=collection_name,
+        documents=document_list,
+        embedding=get_embeddings()
+    )
     time.sleep(1)
 
 
@@ -130,64 +147,4 @@ def source_reformat(document_list):
 
 def get_embeddings():
     return UpstageEmbeddings(model="solar-embedding-1-large-passage")
-
-
-# from pinecone.grpc import PineconeGRPC as Pinecone
-# from pinecone import ServerlessSpec
-# Pinecone 설정
-# pc = Pinecone(
-#     api_key=os.getenv("PINECONE_API_KEY")
-# )
-#
-# index_name = "wiki-upstage-index"
-# chunk = 500
-# namespace = f"chunk_{chunk}_v1"
-#
-# if index_name not in pc.list_indexes().names():
-#     pc.create_index(
-#         name=index_name,
-#         dimension=4096,
-#         metric='cosine',
-#         spec=ServerlessSpec(
-#             cloud='aws',
-#             region='us-east-1'
-#         )
-#     )
-#
-# index = pc.Index(index_name)
-#
-# # 데이터 로드 및 분할
-# loader = DirectoryLoader(".", glob="data/T*", show_progress=True)
-#
-# text_splitter = RecursiveCharacterTextSplitter(
-#     chunk_size=chunk,
-#     chunk_overlap=200,
-#     length_function=len,
-#     is_separator_regex=False
-# )
-#
-# document_list = loader.load_and_split(text_splitter=text_splitter)
-# print(f"총 {len(document_list)}개의 문서가 로드되었습니다.")
-#
-#
-#
-# # 모든 문서가 로드된 후 추가 작업 수행
-# if len(document_list) > 0:
-#     for doc in document_list:
-#         if 'source' in doc.metadata:
-#             file_name = os.path.basename(doc.metadata['source'])  # 파일명 추출
-#             doc.metadata['source'] = file_name  # 메타데이터 업데이트
-#
-#     upstage_embedding = UpstageEmbeddings(model="solar-embedding-1-large")
-#
-#     database = PineconeVectorStore.from_documents(
-#         index_name=index_name,
-#         namespace=namespace,
-#         documents=document_list,
-#         embedding=upstage_embedding
-#     )
-#
-# # 적절한 시간 대기
-# time.sleep(1)
-
 
