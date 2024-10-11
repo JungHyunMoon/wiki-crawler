@@ -66,7 +66,6 @@ def embedding_text_line(source, text_list, document_version):
             # ID 리스트가 비어있지 않은 경우에만 삭제
             if ids_to_delete:
                 index.delete(ids=ids_to_delete, namespace=collection_name)
-            return
     else:
         log_msg = f"CREATE >>> 문서 '{source}'는 새로운 문서입니다. 추가를 진행합니다."
 
