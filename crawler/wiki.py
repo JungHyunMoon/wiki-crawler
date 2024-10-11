@@ -1,24 +1,16 @@
 import os
-import os
 import time
 from urllib.parse import urljoin
 
 import requests
 import schedule
 from bs4 import BeautifulSoup, Tag
-from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
-
 from VecDBLoader import embedding_text_line
 
-from langchain_core.documents import Document
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_pinecone import PineconeVectorStore
-from langchain_upstage import UpstageEmbeddings
-from langchain.vectorstores import Chroma
 from dotenv import load_dotenv
 
 
@@ -215,7 +207,6 @@ def dfs_crawl(driver, visited, crawledPages):
 
         if unvisited_sibling:
             visited.add(unvisited_sibling)
-            time.sleep(0.3)
             path_pointer(driver, unvisited_sibling)
             dfs_crawl(driver, visited, crawledPages)
         else:
@@ -262,7 +253,7 @@ def do_crawl():
 
     # Selenium WebDriver 설정
     options = webdriver.ChromeOptions()
-    options.add_argument('--headless')  # 브라우저 창을 열지 않고 실행
+    # options.add_argument('--headless')  # 브라우저 창을 열지 않고 실행
     options.add_argument('--disable-gpu')
 
     # WebDriver Manager를 사용하여 ChromeDriver 설치 및 설정
