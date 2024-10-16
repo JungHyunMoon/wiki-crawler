@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  webcrawler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONUNBUFFERED=1
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    command: python crawler/wiki.py
