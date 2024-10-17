@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  webcrawler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USER_ID: ${USER_ID}
+        USER_PW: ${USER_PW}
+        OPENAI_API_KEY: ${OPENAI_API_KEY}
+        PINECONE_API_KEY: ${PINECONE_API_KEY}
+        UPSTAGE_API_KEY: ${UPSTAGE_API_KEY}
+    image: junghyunmoon/webcrawler:latest
+    environment:
+      - PYTHONUNBUFFERED=1
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    command: python crawler/wiki.py
