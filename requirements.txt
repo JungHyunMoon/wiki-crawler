@@ -669,8 +669,6 @@ python-iso639==2024.4.27
     # via
     #   -r requirements.in
     #   unstructured
-python-magic==0.4.27
-    # via unstructured
 python-multipart==0.0.9
     # via -r requirements.in
 python-oxmsg==0.0.1
