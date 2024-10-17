@@ -2,7 +2,6 @@ import os
 import time
 from urllib.parse import urljoin
 
-import requests
 import schedule
 from bs4 import BeautifulSoup, Tag
 from selenium import webdriver
@@ -75,7 +74,7 @@ def convert_html_to_md(html_content):
 
     # 수정 기록 추출
     # aria-label이 "수정기록"인 태그 찾기
-    tag = soup.find("span", text="마지막 수정:")
+    tag = soup.find("span", string="마지막 수정:")
 
     # 부모 노드의 3번째 형제 노드 Text(수정 기록) 가져오기
     parent_node = tag.parent
@@ -139,13 +138,6 @@ def convert_html_to_md(html_content):
                 text_data.append(text)
 
     return main_title, text_data, last_modified
-
-def create_session_from_driver(driver):
-    session = requests.Session()
-    cookies = driver.get_cookies()
-    for cookie in cookies:
-        session.cookies.set(cookie['name'], cookie['value'])
-    return session
 
 
 def get_cookies_dict(driver):
@@ -253,8 +245,10 @@ def do_crawl():
 
     # Selenium WebDriver 설정
     options = webdriver.ChromeOptions()
-    # options.add_argument('--headless')  # 브라우저 창을 열지 않고 실행
-    options.add_argument('--disable-gpu')
+    options.add_argument('--headless')  # 헤드리스 모드
+    options.add_argument('--no-sandbox')  # Sandbox 비활성화
+    options.add_argument('--disable-dev-shm-usage')  # /dev/shm 사용 비활성화
+    options.add_argument('--disable-gpu')  # GPU 비활성화 (선택 사항)
 
     # WebDriver Manager를 사용하여 ChromeDriver 설치 및 설정
     service = Service(ChromeDriverManager().install())
