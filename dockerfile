@@ -31,18 +31,15 @@ RUN apt-get update && apt-get install -y \
     qpdf
 
 # Google Chrome의 GPG 키 추가 및 리포지토리 설정
-RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | \
-    gpg --dearmor > /usr/share/keyrings/google-chrome.gpg && \
-    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] \
-    http://dl.google.com/linux/chrome/deb/ stable main" > \
-    /etc/apt/sources.list.d/google-chrome.list
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /usr/share/keyrings/google-chrome.gpg && \
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
 
 # Google Chrome 설치
 RUN apt-get update && apt-get install -y google-chrome-stable
 
 # 필요한 패키지 복사 및 설치
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements-docker.txt ./
+RUN pip install --no-cache-dir -r requirements-docker.txt
 
 # 프로젝트의 전체 소스 코드 복사
 COPY . .
