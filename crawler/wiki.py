@@ -9,6 +9,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from VecDBLoader import embedding_text_line
+from DifyApi import create_by_text, get_documents
 
 from dotenv import load_dotenv
 
@@ -106,11 +107,11 @@ def convert_html_to_md(html_content):
         text = element.get_text(separator='\n', strip=True).replace("¶", "").strip()
 
         if element.name == 'h1':
-            text_data.append('\n\n#' + text + '\n\n')
+            text_data.append('\n\n#' + text + '\n')
         elif element.name == 'h2':
-            text_data.append('\n\n##' + text + '\n\n')
+            text_data.append('\n\n##' + text + '\n')
         elif element.name == 'h3':
-            text_data.append('\n\n###' + text + '\n\n')
+            text_data.append('\n\n###' + text + '\n')
         elif element.name == 'img':
             text = "https://wiki.direa.synology.me/" + element['src']
             text_data.append(text)
@@ -186,7 +187,8 @@ def dfs_crawl(driver, visited, crawledPages):
                 driver.get(link)
                 contents_html = crawl_html_by_class(driver, "v-main__wrap")
                 main_title, text_data, last_modified = convert_html_to_md(contents_html)
-                embedding_text_line(main_title, text_data, last_modified)
+                create_by_text(main_title, text_data) # Dift API 호출
+                # embedding_text_line(main_title, text_data, last_modified) # vectorStore 저장
 
         ############ 파일 탐색 ############
 
@@ -260,6 +262,14 @@ def do_crawl():
     login(driver, url, user_id, user_pw)
     print("Logged in successfully.")
 
+    doc_title_list = {}
+    documents = get_documents().get("data")
+    for document in documents:
+        # 딕셔너리로 저장하여 key:value 형식 유지
+        doc_title_list[document["name"]] = document["id"]
+
+    print(f"총 {len(doc_title_list)}개의 문서 확인")
+
     for menu_index in [1, 2, 3, 4]:
         topMenu = driver.find_element(By.XPATH,
                                       f"(//div[@class='v-list-item v-list-item--link theme--dark'][{menu_index}])")
@@ -268,6 +278,7 @@ def do_crawl():
 
         visited = set()
         crawledPages = []
+        driver.get("https://wiki.direa.synology.me/ko/cruzlink/maintenance/%EA%B8%B0%EA%B4%80/4_5/KAIT")
         dfs_crawl(driver, visited, crawledPages)
 
     # WebDriver 종료

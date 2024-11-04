@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3323663-44a6-4951-ab32-890e38917d63" name="Changes" comment="fix : embedding&#10;&#10;unreachable method return문 제거">
-      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dockerfile" afterDir="false" />
+    <list default="true" id="b3323663-44a6-4951-ab32-890e38917d63" name="Changes" comment="fix : docker.txt&#10;&#10;도커 의존성 파일 분리 및 환경변수 파일 수정&#10;환경변수 처리 필요">
+      <change afterPath="$PROJECT_DIR$/DifyApi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/WebCrawler.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/WebCrawler.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/tomcat.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VecDBLoader.py" beforeDir="false" afterPath="$PROJECT_DIR$/VecDBLoader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crawler/wiki.py" beforeDir="false" afterPath="$PROJECT_DIR$/crawler/wiki.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/chroma" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -53,36 +52,40 @@
   &quot;associatedIndex&quot;: 3
 }</component>
   <component name="ProjectId" id="2lrwI2IRJtOSwitDycbhdmvNBcw" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.Logger.executor&quot;: &quot;Run&quot;,
-    &quot;Python.VecDBLoader.executor&quot;: &quot;Run&quot;,
-    &quot;Python.wiki.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/foqlz/PycharmProjects/WebCrawler/data&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.DifyApi.executor": "Run",
+    "Python.Logger.executor": "Run",
+    "Python.VecDBLoader.executor": "Run",
+    "Python.wiki.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "feature/Dify",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/foqlz/PycharmProjects/WebCrawler",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql_aurora&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql_aurora"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\foqlz\PycharmProjects\WebCrawler" />
       <recent name="C:\Users\foqlz\PycharmProjects\WebCrawler\data" />
     </key>
   </component>
@@ -120,6 +123,16 @@
       <workItem from="1728864444842" duration="13055000" />
       <workItem from="1728956336733" duration="1615000" />
       <workItem from="1728961879723" duration="7376000" />
+      <workItem from="1729152116812" duration="3463000" />
+      <workItem from="1729217255533" duration="2270000" />
+      <workItem from="1729476800953" duration="568000" />
+      <workItem from="1729579737987" duration="1013000" />
+      <workItem from="1729669300900" duration="6263000" />
+      <workItem from="1729730905639" duration="5491000" />
+      <workItem from="1730172191547" duration="130000" />
+      <workItem from="1730177987599" duration="28000" />
+      <workItem from="1730421967243" duration="3716000" />
+      <workItem from="1730700616726" duration="8804000" />
     </task>
     <task id="LOCAL-00001" summary=" init : crawler&#10; &#10; wiki 크롤러&#10; PDF 저장 버전&#10; 테스트용 임시 코드 미삭제">
       <option name="closed" value="true" />
@@ -185,7 +198,23 @@
       <option name="project" value="LOCAL" />
       <updated>1728632627068</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="hotfix : requirements-docker.txt&#10;&#10;도커 의존성 파일 분리 및 환경변수 파일 수정">
+      <option name="closed" value="true" />
+      <created>1729151008167</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1729151008169</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fix : docker.txt&#10;&#10;도커 의존성 파일 분리 및 환경변수 파일 수정&#10;환경변수 처리 필요">
+      <option name="closed" value="true" />
+      <created>1729155614544</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1729155614544</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -222,11 +251,14 @@
     <MESSAGE value="feat : vectorStore&#10;&#10;vectorstore pinecone으로 rollback" />
     <MESSAGE value="build : dependency&#10;&#10;미사용 라이브러리 삭제" />
     <MESSAGE value="fix : embedding&#10;&#10;unreachable method return문 제거" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix : embedding&#10;&#10;unreachable method return문 제거" />
+    <MESSAGE value="hotfix : requirements-docker.txt&#10;&#10;도커 의존성 파일 분리 및 환경변수 파일 수정" />
+    <MESSAGE value="fix : docker.txt&#10;&#10;도커 의존성 파일 분리 및 환경변수 파일 수정&#10;환경변수 처리 필요" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : docker.txt&#10;&#10;도커 의존성 파일 분리 및 환경변수 파일 수정&#10;환경변수 처리 필요" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/WebCrawler$wiki.coverage" NAME="wiki Coverage Results" MODIFIED="1728971008589" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/crawler" />
+    <SUITE FILE_PATH="coverage/WebCrawler$wiki.coverage" NAME="wiki Coverage Results" MODIFIED="1730705038723" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/crawler" />
     <SUITE FILE_PATH="coverage/WebCrawler$Logger.coverage" NAME="Logger Coverage Results" MODIFIED="1728546214647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/WebCrawler$VecDBLoader.coverage" NAME="VecDBLoader Coverage Results" MODIFIED="1728545156295" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/WebCrawler$DifyApi.coverage" NAME="DifyApi Coverage Results" MODIFIED="1730710979918" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

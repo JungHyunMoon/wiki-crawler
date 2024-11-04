@@ -19,12 +19,12 @@ def embedding_text_line(source, text_list, document_version):
         page_content=combined_text,
         metadata={"source": source, "version": document_version}
     )
-    chunk_size = 1500
+    chunk_size = 700
     # 문서 분할
-    document_list = load_and_split_from_text([document], chunk_size)
+    document_list = load_and_split_from_text(source, [document], chunk_size)
 
     index_name = "wiki-upstage-index"
-    collection_name = "chunk_1500_v2"
+    collection_name = f"chunk_{chunk_size}_v1"
 
     # DB 초기화
     pc = Pinecone()
@@ -103,7 +103,7 @@ def embedding_text_line_pinecone(source, text_list):
     namespace = f"chunk_{chunk}_v1"
 
     # 텍스트 데이터를 분할하여 처리
-    document_list = load_and_split_from_text([document], chunk)
+    document_list = load_and_split_from_text(source, [document], chunk)
     embeddings = get_embeddings()
 
     PineconeVectorStore.from_documents(
@@ -116,7 +116,7 @@ def embedding_text_line_pinecone(source, text_list):
 
 
 
-def load_and_split_from_text(documents, chunk):
+def load_and_split_from_text(source, documents, chunk):
     """텍스트 데이터를 직접 처리하는 메서드"""
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=chunk,
@@ -125,12 +125,19 @@ def load_and_split_from_text(documents, chunk):
         is_separator_regex=False
     )
     # Document 객체 리스트를 분할
-    return splitter.split_documents(documents)
+    document_list = splitter.split_documents(documents)
+
+    # 각 청크의 첫 줄에 source 추가
+    # Hallucination 방지 강화
+    for doc in document_list:
+        doc.page_content = f"{source}\n\n" + doc.page_content
+
+    return document_list
 
 def load_document_and_split (loader, chunk):
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=chunk,
-        chunk_overlap=200,
+        chunk_overlap=chunk / 5,
         length_function=len,
         is_separator_regex=False
     )
@@ -146,4 +153,3 @@ def source_reformat(document_list):
 
 def get_embeddings():
     return UpstageEmbeddings(model="solar-embedding-1-large-passage")
-
