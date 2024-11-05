@@ -298,7 +298,7 @@ def do_crawl():
 if __name__ == "__main__":
 
     # 매일 자정에 한번씩 수행
-    schedule.every().day.at("00:00").do(do_crawl)
+    schedule.every().monday.at("00:00").do(do_crawl)
     do_crawl()
 
     print("Schedule started.")
