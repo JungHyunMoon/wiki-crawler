@@ -12,15 +12,15 @@ api_url = os.environ.get("API_URL")
 dataset_id = os.environ.get("DATASET_ID")
 api_key = os.environ.get("API_KEY")
 
+# 요청 헤더 설정
+common_headers = {
+    "Authorization": f"Bearer {api_key}",
+    "Content-Type": "application/json"
+}
+
 def create_by_text(main_title, text_data):
     # API 엔드포인트 설정
     url = f"{api_url}/v1/datasets/{dataset_id}/document/create_by_text"
-
-    # 요청 헤더 설정
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
 
     # 요청 데이터 설정
     data = {
@@ -34,18 +34,12 @@ def create_by_text(main_title, text_data):
 
     # API 호출
     # 응답 처리 할지 보류
-    response = requests.post(url, headers=headers, json=data)
+    response = requests.post(url, headers=common_headers, json=data)
 
 def get_datasets()-> Dict[str, Any]:
     url = f"{api_url}/v1/datasets"
 
-    # 요청 헤더 설정
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=common_headers)
     # 응답 처리
     if response.status_code == 200:
         return response.json()
@@ -60,14 +54,8 @@ def get_documents(page)-> Dict[str, Any]:
     # API 엔드포인트 설정
     url = f"{api_url}/v1/datasets/{dataset_id}/documents?page={page}&limit=100"
 
-    # 요청 헤더 설정
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-
     # API 호출
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=common_headers)
 
     # 응답 처리
     if response.status_code == 200:
@@ -84,12 +72,6 @@ def update_by_text(main_title, text_data, document_id):
     # API 엔드포인트 설정
     url = f"{api_url}/v1/datasets/{dataset_id}/documents/{document_id}/update_by_text"
 
-    # 요청 헤더 설정
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-
     # 요청 데이터 설정
     data = {
         "name": main_title,  # main_title이 name 필드에 들어갑니다
@@ -102,7 +84,7 @@ def update_by_text(main_title, text_data, document_id):
 
     # API 호출
     # 응답 처리 할지 보류
-    response = requests.post(url, headers=headers, json=data)
+    response = requests.post(url, headers=common_headers, json=data)
 
 
 def save_doc(main_title, text_data, last_modified, exist_doc):
