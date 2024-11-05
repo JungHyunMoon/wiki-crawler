@@ -1,3 +1,4 @@
+import math
 import os
 import time
 from urllib.parse import urljoin
@@ -9,7 +10,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from VecDBLoader import embedding_text_line
-from DifyApi import create_by_text, get_documents
+from DifyApi import get_documents, save_doc, get_datasets
 
 from dotenv import load_dotenv
 
@@ -147,7 +148,7 @@ def get_cookies_dict(driver):
     return cookie_dict
 
 
-def dfs_crawl(driver, visited, crawledPages):
+def dfs_crawl(driver, visited, crawledPages, exist_doc):
     while True:
         menu_div = crawl_html_by_class(driver, "__view")
         soup = BeautifulSoup(menu_div, 'html.parser')
@@ -187,7 +188,7 @@ def dfs_crawl(driver, visited, crawledPages):
                 driver.get(link)
                 contents_html = crawl_html_by_class(driver, "v-main__wrap")
                 main_title, text_data, last_modified = convert_html_to_md(contents_html)
-                create_by_text(main_title, text_data) # Dift API 호출
+                save_doc(main_title, text_data, last_modified, exist_doc) # Dift API 호출
                 # embedding_text_line(main_title, text_data, last_modified) # vectorStore 저장
 
         ############ 파일 탐색 ############
@@ -202,14 +203,14 @@ def dfs_crawl(driver, visited, crawledPages):
         if unvisited_sibling:
             visited.add(unvisited_sibling)
             path_pointer(driver, unvisited_sibling)
-            dfs_crawl(driver, visited, crawledPages)
+            dfs_crawl(driver, visited, crawledPages, exist_doc)
         else:
             path_pointer(driver, prev_div.get_text().strip())
             break
         ############ 경로 탐색 ############
 
 
-def save_doc(doc_title, data):
+def save_file(doc_title, data):
     # 텍스트 파일 경로 설정
     folder_path = os.path.join('../', 'data')
 
@@ -245,7 +246,7 @@ def do_crawl():
     user_id = os.getenv("USER_ID")
     user_pw = os.getenv("USER_PW")
 
-    # Selenium WebDriver 설정
+    # 1. Selenium 설정
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')  # 헤드리스 모드
     options.add_argument('--no-sandbox')  # Sandbox 비활성화
@@ -258,18 +259,28 @@ def do_crawl():
     driver.set_window_size(1920, 1080)
     driver.implicitly_wait(2)
 
-    # 1. 로그인 수행
+    # 2. 로그인 수행
     login(driver, url, user_id, user_pw)
     print("Logged in successfully.")
 
-    doc_title_list = {}
-    documents = get_documents().get("data")
-    for document in documents:
-        # 딕셔너리로 저장하여 key:value 형식 유지
-        doc_title_list[document["name"]] = document["id"]
+    # 3. 저장된 문서 확인
+    cnt = 1
+    has_next = True
+    exist_doc = {}
+    while has_next:
+        documents_response = get_documents(cnt)
 
-    print(f"총 {len(doc_title_list)}개의 문서 확인")
+        has_next = documents_response.get("has_more", False)  # 기본값 False 설정
+        documents = documents_response.get("data", [])
 
+        for document in documents:
+            exist_doc[document["name"]] = document["id"]
+
+        cnt += 1
+
+    print(f"총 {len(exist_doc)}개의 문서 확인")
+
+    # 4. 수집 시작
     for menu_index in [1, 2, 3, 4]:
         topMenu = driver.find_element(By.XPATH,
                                       f"(//div[@class='v-list-item v-list-item--link theme--dark'][{menu_index}])")
@@ -278,10 +289,9 @@ def do_crawl():
 
         visited = set()
         crawledPages = []
-        driver.get("https://wiki.direa.synology.me/ko/cruzlink/maintenance/%EA%B8%B0%EA%B4%80/4_5/KAIT")
-        dfs_crawl(driver, visited, crawledPages)
+        dfs_crawl(driver, visited, crawledPages, exist_doc)
 
-    # WebDriver 종료
+    # 5. WebDriver 종료
     driver.quit()
 
 

@@ -1,9 +1,11 @@
+import math
 import os
 
 import requests
 from typing import Dict, Any
 
 from dotenv import load_dotenv
+from Logger import create_wiki_log
 
 load_dotenv()
 api_url = os.environ.get("API_URL")
@@ -34,11 +36,29 @@ def create_by_text(main_title, text_data):
     # 응답 처리 할지 보류
     response = requests.post(url, headers=headers, json=data)
 
-def get_documents()-> Dict[str, Any]:
-    # API 엔드포인트 설정
-    url = f"{api_url}/v1/datasets/{dataset_id}/documents"
+def get_datasets()-> Dict[str, Any]:
+    url = f"{api_url}/v1/datasets"
 
-    print(url)
+    # 요청 헤더 설정
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+
+    response = requests.get(url, headers=headers)
+    # 응답 처리
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return {
+            "status": "error",
+            "status_code": response.status_code,
+            "error": response.text
+        }
+
+def get_documents(page)-> Dict[str, Any]:
+    # API 엔드포인트 설정
+    url = f"{api_url}/v1/datasets/{dataset_id}/documents?page={page}&limit=100"
 
     # 요청 헤더 설정
     headers = {
@@ -84,19 +104,19 @@ def update_by_text(main_title, text_data, document_id):
     # 응답 처리 할지 보류
     response = requests.post(url, headers=headers, json=data)
 
-doc_title_list = {}
-documents = get_documents().get("data")
-for document in documents:
-    # 딕셔너리로 저장하여 key:value 형식 유지
-    doc_title_list[document["name"]] = document["id"]
+
+def save_doc(main_title, text_data, last_modified, exist_doc):
+    log_msg = f"EXIST >>> 문서 '{main_title}'은(는) 이미 최신 버전입니다. 업데이트를 건너뜁니다."
+
+    if main_title in exist_doc.keys() and last_modified.startswith("지난주"):
+        update_by_text(main_title, text_data, exist_doc[main_title])
+        log_msg = f"UPDATE >>> 문서 '{main_title}'의 버전이 {last_modified} 일자로 변경되었습니다. 최신화를 진행합니다."
+
+    if main_title not in exist_doc.keys():
+        create_by_text(main_title, text_data)
+        log_msg = f"CREATE >>> 문서 '{main_title}'은(는) 새로운 문서입니다. 추가를 진행합니다."
+        
+
+    create_wiki_log("crawl", log_msg)
 
 
-# test code
-param = "회고록2"
-last_modified = "지난주 화요일 오후 5:45"
-text_data = "수정한다요"
-if param in doc_title_list.keys() and last_modified.startswith("지난주"):
-    update_by_text(param, text_data, doc_title_list[param])
-
-if param not in doc_title_list.keys():
-    create_by_text(param, text_data)
