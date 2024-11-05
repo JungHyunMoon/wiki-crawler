@@ -265,12 +265,12 @@ def do_crawl():
 
     # 3. 저장된 문서 확인
     cnt = 1
-    has_next = True
+    has_more = True
     exist_doc = {}
-    while has_next:
+    while has_more:
         documents_response = get_documents(cnt)
 
-        has_next = documents_response.get("has_more", False)  # 기본값 False 설정
+        has_more = documents_response.get("has_more", False)  # 기본값 False 설정
         documents = documents_response.get("data", [])
 
         for document in documents:
