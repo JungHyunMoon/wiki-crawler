@@ -1,9 +1,12 @@
 import logging
 import os
 from datetime import datetime
+from pytz import timezone
 
 def create_wiki_log(process_name, message):
-    current_date = datetime.now().strftime("%Y-%m-%d")
+    # 한국 시간대 설정
+    seoul_tz = timezone("Asia/Seoul")
+    current_date = datetime.now(seoul_tz).strftime("%Y-%m-%d")
     log_file_name = f"{process_name}_{current_date}.log"
     log_file_path = os.path.join("logs", log_file_name)
 
@@ -15,10 +18,10 @@ def create_wiki_log(process_name, message):
 
     # 핸들러가 이미 추가되어 있는지 확인
     if not logger.handlers:
-        handler = logging.FileHandler(log_file_path)
+        handler = logging.FileHandler(log_file_path, encoding='utf-8')
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         handler.setFormatter(formatter)
         logger.addHandler(handler)
 
-    # 로그 기록
+    # 한국 시간으로 메시지 기록
     logger.info(message)
