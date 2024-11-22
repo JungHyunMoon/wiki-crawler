@@ -148,7 +148,7 @@ def get_cookies_dict(driver):
     return cookie_dict
 
 
-def dfs_crawl(driver, visited, crawledPages, exist_doc):
+def dfs_crawl(driver, visited, crawled_pages, exist_doc):
     while True:
         menu_div = crawl_html_by_class(driver, "__view")
         soup = BeautifulSoup(menu_div, 'html.parser')
@@ -179,8 +179,8 @@ def dfs_crawl(driver, visited, crawledPages, exist_doc):
         unvisited_sibling = None
 
         ############ 파일 탐색 ############
-        if current_dir not in crawledPages:
-            crawledPages.append(current_dir)
+        if current_dir not in crawled_pages:
+            crawled_pages.append(current_dir)
             # 크롤링 수행
             links = extract_links(driver)
             for link in links:
@@ -203,7 +203,7 @@ def dfs_crawl(driver, visited, crawledPages, exist_doc):
         if unvisited_sibling:
             visited.add(unvisited_sibling)
             path_pointer(driver, unvisited_sibling)
-            dfs_crawl(driver, visited, crawledPages, exist_doc)
+            dfs_crawl(driver, visited, crawled_pages, exist_doc)
         else:
             path_pointer(driver, prev_div.get_text().strip())
             break
@@ -282,14 +282,14 @@ def do_crawl():
 
     # 4. 수집 시작
     for menu_index in [1, 2, 3, 4]:
-        topMenu = driver.find_element(By.XPATH,
+        top_menu = driver.find_element(By.XPATH,
                                       f"(//div[@class='v-list-item v-list-item--link theme--dark'][{menu_index}])")
-        topMenu.click()
+        top_menu.click()
         time.sleep(5)
 
         visited = set()
-        crawledPages = []
-        dfs_crawl(driver, visited, crawledPages, exist_doc)
+        crawled_pages = []
+        dfs_crawl(driver, visited, crawled_pages, exist_doc)
 
     # 5. WebDriver 종료
     driver.quit()
