@@ -14,8 +14,14 @@ from DifyApi import get_documents, save_doc, get_datasets
 
 from dotenv import load_dotenv
 
+# 상수 정의
+BASE_URL = "https://wiki.direa.synology.me"
+LOGIN_URL = f"{BASE_URL}/login"
 
 def login(driver, url, user_id, user_pw):
+    """
+    사이트에 로그인 수행
+    """
     # 웹페이지 요청
     driver.get(url)
 
@@ -37,6 +43,9 @@ def login(driver, url, user_id, user_pw):
 
 
 def crawl_html_by_class(driver, class_name):
+    """
+    드라이버 특정 클래스 DIV 탐색
+    """
     # 'contents' 클래스를 가진 div 요소 찾기
     contents_div = driver.find_element(By.CLASS_NAME, class_name)
     contents_html = contents_div.get_attribute('outerHTML')
@@ -50,11 +59,17 @@ def crawl_full_page(driver):
 
 
 def path_pointer(driver, text):
+    """
+    드라이버 경로 이동
+    """
     driver.find_element(By.XPATH, f"//div[@class='v-list-item__title'][contains(text(), '{text}')]").click()
     time.sleep(0.5)
 
 
 def extract_links(driver):
+    """
+    네비게이션에서 모든 링크 추출
+    """
     html_content = crawl_html_by_class(driver, 'v-navigation-drawer__content')
 
     soup = BeautifulSoup(html_content, 'html.parser')
@@ -67,29 +82,49 @@ def extract_links(driver):
     return links
 
 def remove_special_characters(input_string):
-    # 정규 표현식으로 알파벳과 숫자를 제외한 모든 문자를 제거
+    """
+    정규 표현식으로 알파벳과 숫자를 제외한 모든 문자를 제거
+    """
     result = input_string.replace("?", "")
     return result
 
+
+def extract_last_modified(soup):
+    """
+    마지막 수정 시간 추출
+    """
+    tag = soup.find("span", string="마지막 수정:")
+    if tag:
+        siblings = [s for s in tag.parent.next_siblings if isinstance(s, Tag)]
+        return siblings[1].get_text(strip=True) if siblings else None
+    return None
+
+
+def extract_title_and_description(soup):
+    """
+    메인 제목과 설명 추출
+    """
+    main_title = soup.find('div', class_='headline grey--text text--darken-3')
+    description = soup.find('div', class_='caption grey--text text--darken-1')
+    return (
+        remove_special_characters(main_title.get_text(strip=True)) if main_title else None,
+        description.get_text(strip=True) if description else None
+    )
+
+
 def convert_html_to_md(html_content):
+    """
+    HTML 내용을 Markdown 포맷 TEXT로 변환
+    """
     soup = BeautifulSoup(html_content, 'html.parser')
 
     # 수정 기록 추출
-    # aria-label이 "수정기록"인 태그 찾기
-    tag = soup.find("span", string="마지막 수정:")
+    last_modified = extract_last_modified(soup)
 
-    # 부모 노드의 3번째 형제 노드 Text(수정 기록) 가져오기
-    parent_node = tag.parent
-    siblings = [s for s in parent_node.next_siblings if isinstance(s, Tag)]
-    last_modified = siblings[1].get_text(strip=True)
     print(f"wiki : {last_modified}")
 
     # 메인 제목과 설명 추출
-    main_title_element = soup.find('div', class_='headline grey--text text--darken-3')
-    main_description_element = soup.find('div', class_='caption grey--text text--darken-1')
-
-    main_title = remove_special_characters(main_title_element.get_text(strip=True)) if main_title_element else None
-    main_description = main_description_element.get_text(strip=True) if main_description_element else None
+    main_title, description = extract_title_and_description(soup)  # 제목 및 설명 추출
 
     # <br> 태그를 \n으로 대체
     for br in soup.find_all("br"):
@@ -99,8 +134,8 @@ def convert_html_to_md(html_content):
 
     if main_title:
         text_data.append(main_title + '\n')
-    if main_description:
-        text_data.append(main_description + '\n')
+    if description:
+        text_data.append(description + '\n')
 
     soup = soup.find('div', class_='contents')
 
@@ -142,13 +177,10 @@ def convert_html_to_md(html_content):
     return main_title, text_data, last_modified
 
 
-def get_cookies_dict(driver):
-    cookies = driver.get_cookies()
-    cookie_dict = {cookie['name']: cookie['value'] for cookie in cookies}
-    return cookie_dict
-
-
 def dfs_crawl(driver, visited, crawled_pages, exist_doc):
+    """
+    깊이 우선 탐색(DFS) 방식으로 페이지 크롤링
+    """
     while True:
         menu_div = crawl_html_by_class(driver, "__view")
         soup = BeautifulSoup(menu_div, 'html.parser')
@@ -210,7 +242,23 @@ def dfs_crawl(driver, visited, crawled_pages, exist_doc):
         ############ 경로 탐색 ############
 
 
+def crawl_menu(driver, menu_index, existing_documents):
+    """
+    특정 메뉴와 하위 메뉴 크롤링
+    """
+    top_menu = driver.find_element(By.XPATH, f"(//div[contains(@class, 'v-list-item')][{menu_index}])")
+    top_menu.click()
+    time.sleep(5)
+
+    visited = set()
+    crawled_pages = []
+    dfs_crawl(driver, visited, crawled_pages, existing_documents)
+
+
 def save_file(doc_title, data):
+    """
+    텍스트 저장 필요시 활용
+    """
     # 텍스트 파일 경로 설정
     folder_path = os.path.join('../', 'data')
 
@@ -237,66 +285,71 @@ def open_file(file_path):
         return f.read()
 
 
-def do_crawl():
-    print("=====================================================================")
-    print("===================== DIREA WIKI CRAWLING START =====================")
-    print("=====================================================================")
-    url = 'https://wiki.direa.synology.me/login'
-    load_dotenv()
-    user_id = os.getenv("USER_ID")
-    user_pw = os.getenv("USER_PW")
-
-    # 1. Selenium 설정
+def initialize_driver():
+    """
+    Selenium WebDriver 초기화
+    """
     options = webdriver.ChromeOptions()
-    options.add_argument('--headless')  # 헤드리스 모드
-    options.add_argument('--no-sandbox')  # Sandbox 비활성화
-    options.add_argument('--disable-dev-shm-usage')  # /dev/shm 사용 비활성화
-    options.add_argument('--disable-gpu')  # GPU 비활성화 (선택 사항)
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--disable-gpu')
 
-    # WebDriver Manager를 사용하여 ChromeDriver 설치 및 설정
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
     driver.set_window_size(1920, 1080)
     driver.implicitly_wait(2)
+    return driver
 
-    # 2. 로그인 수행
-    login(driver, url, user_id, user_pw)
-    print("Logged in successfully.")
-
-    # 3. 저장된 문서 확인
+def fetch_saved_documents():
+    """
+    Dify API Document 확인
+    """
     cnt = 1
     has_more = True
-    exist_doc = {}
+    existing_documents = {}
+
     while has_more:
-        documents_response = get_documents(cnt)
-
-        has_more = documents_response.get("has_more", False)  # 기본값 False 설정
-        documents = documents_response.get("data", [])
-
+        response = get_documents(cnt)
+        has_more = response.get("has_more", False)
+        documents = response.get("data", [])
         for document in documents:
-            exist_doc[document["name"]] = document["id"]
-
+            existing_documents[document["name"]] = document["id"]
         cnt += 1
 
-    print(f"총 {len(exist_doc)}개의 문서 확인")
+    print(f"총 {len(existing_documents)}개의 문서 확인")
+    return existing_documents
+
+def do_crawl():
+    """
+    크롤링의 주요 로직
+    """
+    print("=====================================================================")
+    print("===================== DIREA WIKI CRAWLING START =====================")
+    print("=====================================================================")
+    load_dotenv()
+    user_id = os.getenv("USER_ID")
+    user_pw = os.getenv("USER_PW")
+
+    # 1. Selenium Driver 초기화
+    driver = initialize_driver()
+
+    # 2. 로그인 수행
+    login(driver, LOGIN_URL, user_id, user_pw)
+    print("Login successful.")
+
+    # 3. 기존 문서 목록 가져오기
+    exist_doc = fetch_saved_documents()
 
     # 4. 수집 시작
-    for menu_index in [1, 2, 3, 4]:
-        top_menu = driver.find_element(By.XPATH,
-                                      f"(//div[@class='v-list-item v-list-item--link theme--dark'][{menu_index}])")
-        top_menu.click()
-        time.sleep(5)
+    for menu_index in range(1, 5):
+        crawl_menu(driver, menu_index, exist_doc)
 
-        visited = set()
-        crawled_pages = []
-        dfs_crawl(driver, visited, crawled_pages, exist_doc)
-
-    # 5. WebDriver 종료
+    # 5. Driver 종료
     driver.quit()
 
 
 if __name__ == "__main__":
-
     # 매일 자정에 한번씩 수행
     schedule.every().monday.at("00:00").do(do_crawl)
     do_crawl()
