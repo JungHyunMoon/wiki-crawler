@@ -4,7 +4,7 @@ services:
   webcrawler:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
     image: junghyunmoon/webcrawler:latest
     environment:
       USER_ID: ${USER_ID}

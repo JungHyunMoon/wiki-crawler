@@ -6,6 +6,7 @@ from urllib.parse import urljoin
 import schedule
 from bs4 import BeautifulSoup, Tag
 from selenium import webdriver
+from selenium.common import WebDriverException
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
@@ -149,7 +150,7 @@ def convert_html_to_md(html_content):
         elif element.name == 'h3':
             text_data.append('\n\n###' + text + '\n')
         elif element.name == 'img':
-            text = "https://wiki.direa.synology.me/" + element['src']
+            text = BASE_URL + element['src']
             text_data.append(text)
         elif element.name == 'table':
             table_text = ["\n"]
@@ -320,6 +321,7 @@ def fetch_saved_documents():
     print(f"총 {len(existing_documents)}개의 문서 확인")
     return existing_documents
 
+
 def do_crawl():
     """
     크롤링의 주요 로직
@@ -331,22 +333,45 @@ def do_crawl():
     user_id = os.getenv("USER_ID")
     user_pw = os.getenv("USER_PW")
 
-    # 1. Selenium Driver 초기화
-    driver = initialize_driver()
+    # 최대 재시도 횟수
+    max_retries = 3
+    attempt = 0
 
-    # 2. 로그인 수행
-    login(driver, LOGIN_URL, user_id, user_pw)
-    print("Login successful.")
+    while attempt < max_retries:
+        try:
+            # 1. Selenium Driver 초기화
+            driver = initialize_driver()
 
-    # 3. 기존 문서 목록 가져오기
-    exist_doc = fetch_saved_documents()
+            # 2. 로그인 수행
+            login(driver, LOGIN_URL, user_id, user_pw)
+            print("Login successful.")
 
-    # 4. 수집 시작
-    for menu_index in range(1, 5):
-        crawl_menu(driver, menu_index, exist_doc)
+            # 3. 기존 문서 목록 가져오기
+            exist_doc = fetch_saved_documents()
 
-    # 5. Driver 종료
-    driver.quit()
+            # 4. 수집 시작
+            for menu_index in range(1, 5):
+                crawl_menu(driver, menu_index, exist_doc)
+
+            # 5. Driver 종료
+            driver.quit()
+
+            print("=====================================================================")
+            print("====================== DIREA WIKI CRAWLING END ======================")
+            print("=====================================================================")
+
+            # 성공하면 루프 종료
+            break
+
+        except WebDriverException as e:
+            attempt += 1
+            print(f"Attempt {attempt} failed: {str(e)}")
+            if attempt >= max_retries:
+                print("Max retries reached. Exiting...")
+                raise  # 재시도 실패 시 예외를 다시 발생
+
+            print("Retrying...")
+            time.sleep(2)  # 재시도 전 대기 시간
 
 
 if __name__ == "__main__":

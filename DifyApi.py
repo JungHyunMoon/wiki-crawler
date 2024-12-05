@@ -85,7 +85,7 @@ def update_by_text(main_title: str, text_data: str, document_id: str) -> None:
         log_msg = f"UPDATE >>> 문서 '{main_title}'이(가) 성공적으로 업데이트되었습니다."
         create_wiki_log("success", log_msg)
 
-def save_doc(main_title: str, text_data: str, last_modified: str, exist_doc: Dict[str, str]) -> None:
+def save_doc(main_title, text_data, last_modified, exist_doc) -> None:
     """
     문서가 존재하면 업데이트, 없으면 생성하는 함수.
     """
