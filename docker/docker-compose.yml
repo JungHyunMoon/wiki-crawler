@@ -3,9 +3,11 @@ version: '3.8'
 services:
   webcrawler:
     build:
-      context: .
-      dockerfile: dockerfile
+      context: ../
+      dockerfile: docker/dockerfile
     image: junghyunmoon/webcrawler:latest
+    env_file:
+      - .env
     environment:
       USER_ID: ${USER_ID}
       USER_PW: ${USER_PW}
@@ -13,5 +15,6 @@ services:
       PINECONE_API_KEY: ${PINECONE_API_KEY}
       UPSTAGE_API_KEY: ${UPSTAGE_API_KEY}
     volumes:
-      - .:/app
-    command: python crawler/wiki.py
+      - ./crawler:/app/crawler
+      - ./logs:/app/logs
+      - ./data:/app/data

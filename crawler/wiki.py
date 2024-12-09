@@ -1,4 +1,3 @@
-import math
 import os
 import time
 from urllib.parse import urljoin
@@ -10,8 +9,7 @@ from selenium.common import WebDriverException
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
-from VecDBLoader import embedding_text_line
-from DifyApi import get_documents, save_doc, get_datasets
+from DifyApi import get_documents, save_doc
 
 from dotenv import load_dotenv
 
